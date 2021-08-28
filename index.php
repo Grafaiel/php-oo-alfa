@@ -26,7 +26,7 @@ ini_set('display_errors', 1);
         $conexao = new Conn();
         $professores = $conexao->listarProfessores();
         foreach ($professores as $key => $value) {
-            echo $value['nome'].' - '."<a href=#>Editar</a> <br>";
+            echo $value['nome'].' - '."<a href='editarProfessor.php?email={$value["email"]}'>Editar</a> <br>";
         }
     ?>
 

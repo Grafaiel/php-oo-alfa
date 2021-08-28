@@ -55,6 +55,7 @@
             </form>
         <?php
         } ?>
+        <br><hr><br>
         <a href="index.php">Voltar</a>
 </body>
 </html>
