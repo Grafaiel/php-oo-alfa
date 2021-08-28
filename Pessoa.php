@@ -7,7 +7,7 @@ abstract class Pessoa
     public int $id;
     public string $nome;
     public string $telefone;
-    public string $email;
+    protected string $email;
     public string $dataNascimento;
     
     public function __construct($email)

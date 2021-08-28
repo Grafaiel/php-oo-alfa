@@ -11,13 +11,13 @@ ini_set('display_errors', 1);
     <title>Sistema de gestão acadêmica</title>
 </head>
 <body>
+
     <?php
     require './Pessoa.php';
     require './Estudante.php';
     require './Professor.php';
+    require './Disciplina.php';
     ?>
-    
-    
     
     <br><hr>
     
@@ -26,15 +26,28 @@ ini_set('display_errors', 1);
         $conexao = new Conn();
         $professores = $conexao->listarProfessores();
         foreach ($professores as $key => $value) {
+            echo $value['nome'].' - '."<a href=#>Editar</a> <br>";
+        }
+    ?>
+
+<br><hr>
+
+    <h2> Estudantes </h2>
+    
+    <?php
+        $conexao = new Conn();
+        $estudantes = $conexao->listarEstudantes();
+        foreach ($estudantes as $key => $value) {
             echo $value['nome'].' - '."<a href='editarEstudante.php?email={$value["email"]}'>Editar</a> <br>";
         }
     ?>
 
 <br><hr>
 
-<h2> Estudantes </h2>
+<h2> Estudante </h2>
+
     <?php
-        $estudante = new Estudante('qq@qq.qq');
+        $estudante = new Estudante('mariana@mariana.com.br');
         $estudanteDados = $estudante->verEstudante();
         echo "Nome: {$estudanteDados->nome} <br>";
         echo "Telefone: {$estudanteDados->telefone} <br>";
@@ -45,6 +58,32 @@ ini_set('display_errors', 1);
         echo "Avaliação: {$estudante->calculaAvaliacao()} <br>";
         echo "Disciplinas: {$estudante->disciplinasMatriculadas()} <br>";
         echo "Atualizar Ira: {$estudante->atualizaIRA(8)} <br>";
+    ?>
+
+<br><hr>
+
+    <h2>Disciplinas</h2>
+    <?php 
+        $disciplinaMatematica = new Disciplina();
+        $disciplinaMatematica->nome = 'Matemática';
+        $disciplinaMatematica->setCodigo('MATI');
+        $disciplinaMatematica->creditos = 4;
+        Disciplina::ministrarDisciplina();
+        $matematica = $disciplinaMatematica->verDisciplina();
+        echo $matematica.PHP_EOL;
+    ?>
+
+    <br>
+
+    <h2>Disciplinas</h2>
+    <?php 
+        $disciplinaPortugues = new Disciplina();
+        $disciplinaPortugues->nome = 'Português';
+        $disciplinaPortugues->setCodigo('PORT');
+        $disciplinaPortugues->creditos = 4;
+        Disciplina::ministrarDisciplina();
+        $portugues = $disciplinaPortugues->verDisciplina();
+        echo $portugues.PHP_EOL;
     ?>
 
 </body>
