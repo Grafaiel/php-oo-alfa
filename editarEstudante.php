@@ -13,44 +13,48 @@
         require './Estudante.php';
 
         $estudante = new Estudante($_GET['email']);
-        $estudanteDados = $estudante->verEstudante();
-
+        
         if(isset($_POST['editarEstudante'])){
             $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
             $estudante = new Estudante($formData['email']);
             $estudanteDados = $estudante->editarEstudante($formData);
-
+            
             if ($estudanteDados) {
                 echo "Estudante editado com sucesso!";
             } else {
                 echo "Falha ao editar estudante!";
             }
-        }
+        }else {
+            $estudanteDados = $estudante->verEstudante(); 
     ?>
-    <form name="EdicaoEstudante" action="" method="POST" >
-        <input type="hidden" name="id" value="<?=$estudanteDados->ID?>">
-        <p>
-            <label for="nome">Nome</label>
-            <input type="text" name="nome" required id="" value="<?=$estudanteDados->nome?>">
-            <br>
-        </p>
-        <p>
-            <label for="telefone">Telefone</label>
-            <input type="text" name="telefone" id="" value="<?=$estudanteDados->telefone?>">
-        </p>
-        <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="" value="<?=$estudanteDados->email?>">
-        </p>
-        <p>
-            <label for="dataNascimento">Data de Nascimento</label>
-            <input type="text" name="data_nascimento" id="" value="<?=$estudanteDados->data_nascimento?>">
-        </p>
-        <p>
-            <label for="matricula">Matrícula</label>
-            <input type="text" name="matricula" id="" value="<?=$estudanteDados->matricula?>">
-        </p>
-        <input type="submit" value="Editar" name="editarEstudante" >
-    </form>
+
+            <form name="EdicaoEstudante" action="" method="POST" >
+                <input type="hidden" name="id" value="<?=$estudanteDados->ID?>">
+                <p>
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" required value="<?=$estudanteDados->nome?>">
+                    <br>
+                </p>
+                <p>
+                    <label for="telefone">Telefone</label>
+                    <input type="text" name="telefone" value="<?=$estudanteDados->telefone?>">
+                </p>
+                <p>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" value="<?=$estudanteDados->email?>">
+                </p>
+                <p>
+                    <label for="dataNascimento">Data de Nascimento</label>
+                    <input type="text" name="data_nascimento" value="<?=$estudanteDados->data_nascimento?>">
+                </p>
+                <p>
+                    <label for="matricula">Matrícula</label>
+                    <input type="text" name="matricula" value="<?=$estudanteDados->matricula?>">
+                </p>
+                <input type="submit" value="Editar" name="editarEstudante" >
+            </form>
+        <?php
+        } ?>
+        <a href="index.php">Voltar</a>
 </body>
 </html>
