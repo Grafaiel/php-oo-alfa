@@ -18,4 +18,16 @@ class Conn
             throw $th;
         }
     }
+
+    public function listarProfessores():array
+    {
+        $sql = "SELECT nome, telefone, email, especialidade, salario, data_nascimento
+                FROM professor o
+                LEFT JOIN pessoa p
+                ON o.pessoa_id = p.ID";
+        $conectar = $this->connect();
+        $result = $conectar->prepare($sql);
+        $result->execute();
+        return $result->fetchAll();
+    }
 }
